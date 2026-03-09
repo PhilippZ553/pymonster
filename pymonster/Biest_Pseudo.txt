@@ -1,0 +1,70 @@
+FUNKTION BiestAktion():
+    # 1. Infos vom Server bekommen
+    BiestInfos = vomServerEmpfangen()
+
+    # 2. Biest im Spielzustand aktualisieren oder neu erstellen
+    falls Biest existiert:
+        aktualisiereBiest(BiestInfos)
+    sonst:
+        neuesBiestErstellen(BiestInfos)
+
+    # 3. Spielumgebung abfragen
+    Feld, Gegner = SpielzustandAbfragen(Biest)
+
+    # 4. Nächste Ziele erkennen
+    nächstesRaubtier = sucheZiel(Feld, "Raubtier")
+    nächstesFutter = sucheZiel(Feld, "Futter")
+    nächsteBeute = sucheZiel(Feld, "Beute")
+
+    # 5. Standardbewegung zufällig
+    Aktion = "Bewege"
+    Richtung = zufälligeRichtung()
+
+    # --- Strategien ---
+    falls Raubtier in der Nähe:
+        Richtung = wegVon(Raubtier)
+        Aktion = "Bewege"
+
+    sonst falls Energie hoch genug:
+        Richtung = sichereRichtung()
+        Aktion = "Teilen"
+
+    sonst falls Futter in der Nähe:
+        Richtung = hinZu(Futter)
+        Aktion = "Bewege"
+
+    sonst falls Beute in der Nähe:
+        Richtung = hinZu(Beute)
+        Aktion = "Bewege"
+
+    # 6. Befehl an Server senden
+    sendeBefehlAnServer(Aktion, Richtung)
+
+    # 7. Antwort auswerten
+    Antwort = vomServerEmpfangen()
+    falls Erfolg:
+        aktualisiereBiestPosition(Richtung)
+        falls Aktion == "Teilen":
+            neuesBiestErstellen()
+
+
+
+FUNKTION sucheZiel(Feld, ZielArt):
+    # Finde nächstes Ziel vom Typ ZielArt
+    return ZielPosition ODER None
+
+FUNKTION hinZu(Start, Ziel):
+    # Berechne Schritt in Richtung Ziel
+    return Richtung
+
+FUNKTION wegVon(Start, Gefahr):
+    # Berechne Schritt weg von Gefahr
+    return Richtung
+
+FUNKTION zufälligeRichtung():
+    # Wähle zufällige Bewegungsrichtung
+    return Richtung
+
+FUNKTION sichereRichtung():
+    # Wähle Richtung, wo genug Platz ist
+    return Richtung

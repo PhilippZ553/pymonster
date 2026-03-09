@@ -1,0 +1,66 @@
+
+# Anforderungsanalyse: Biest-Steuerung auf Kugeloberfläche
+
+## Ziel
+Ein autonom gesteuertes Biest soll in einer verteilten Simulation überleben, wachsen, andere Biester fressen, sich teilen und seine Population maximieren, ohne durch Regelverletzungen disqualifiziert zu werden.
+
+## Fachliche Anforderungen
+
+### Umgebung & Weltmodell
+- Spielfläche ist eine Kugeloberfläche, in Zellen aufgeteilt
+- Sichtbereich: (2N+1) × (2N+1) mit dem Biest im Zentrum
+- Sichtinformationen pro Zelle:
+  - . = leer
+  - * = Futter
+  - < = Biest mit kleinerer Energie
+  - = = Biest mit identischer Energie
+  - > = Biest mit größerer Energie
+
+### Bewegung
+- Bewegungsbereich: (2N-1) × (2N-1)
+- Bewegung kostet Energie, Stillstand kostet Grundumsatz
+- Auf Futter bewegen: Energiegewinn
+
+### Interaktionen mit Biestern
+- Nicht verwandt:
+  - Kleineres Biest verschwindet, größeres übernimmt Energie
+  - Bei gleicher Energie gewinnt Verteidiger
+- Verwandt: (wenn sich die verwandten auf einem Feld befinden)
+  - beide verschwinden
+
+### Fortpflanzung
+- Ab Energieschwelle: Teilung in Nachbarzelle (N,S,E,W)
+- Energie wird geteilt
+
+### Tod
+- Energie 0: Biest wartet
+- Verschwindet nach Zeit ohne Futter
+
+## Kommunikation & Schnittstelle
+- Server sendet: ID, Energie, Sichtbereich
+- Client sendet Aktionen (Bewegung oder Teilung)
+- Ungültiger Befehl: gesamte Biest-Gruppe disqualifiziert
+
+## Simulation
+1. Anmeldung am Server
+2. Rundenweise Steuerung aller Biester
+3. Ende bei Zeitablauf oder keinem Biest
+4. Ergebnisse werden gespeichert
+
+## Nichtfunktionale Anforderungen
+- Effiziente Entscheidungen
+- Robuste Befehle
+- Skalierung bei Teilungen
+
+## Strategische Anforderungen (effektives Verhalten)
+- Futter priorisieren
+- Schwächere jagen, stärkere meiden
+- Rechtzeitig teilen
+- Energiehaushalt sichern
+- Verwandte meiden
+
+## Erfolgskriterien
+- Hohe Gesamtenergie
+- Stabile Population
+- Minimale Verluste
+- Keine Regelverstöße

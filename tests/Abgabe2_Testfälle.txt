@@ -1,0 +1,116 @@
+
+  Beispiel Testfälle
+    
+die nicht auf unseren Code abgestimmt wurden sondern für Abgabe 2.
+Testfälle wurden so gestaltet das Sie für unseren Code Recycle bar sein sollten.
+
+
+      Name "Futter in Nachbarzelle",
+      Umgebung:
+
+      ["leer", "leer", "leer"],
+      ["leer", "Biest", "futter"],
+      ["leer", "leer", "leer"]
+      
+      energie: 50,
+      erwartete_bewegung: "rechts",
+      begründung: "Futter befindet sich direkt rechts neben dem Biest. Bewegung zum Futter ist energieeffizient."
+    
+
+
+      Name: "Stärkeres Biest in Sichtweite",
+      Umgebung:
+
+      ["leer", "Biest_stärker", "leer"],
+      ["leer", "Biest", "leer"],
+      ["leer", "leer", "leer"]
+      
+      energie: 30,
+      erwartete_bewegung: "links",
+      begründung: "Ein stärkeres Biest ist in der Nähe. Rückzug, um Energie zu sparen und nicht gefressen zu werden."
+    
+
+
+      Name: "Schwächeres Biest in Reichweite",
+      Umgebung:
+ 
+      ["leer", "leer", "leer"],
+      ["leer", "Biest", "Biest_schwächer"],
+      ["leer", "leer", "leer"]
+      
+      energie: 60,
+      erwartete_bewegung: "rechts",
+      begründung: "Schwächeres Biest in Nachbarzelle. Angriff, um Energie aufzunehmen."
+    
+
+
+      Name: "Keine Reize in Umgebung",
+      Umgebung: 
+
+      ["leer", "leer", "leer"],
+      ["leer", "Biest", "leer"],
+      ["leer", "leer", "leer"]
+      
+      energie: 20,
+      erwartete_bewegung: "bleiben",
+      begründung: "Keine Nahrung oder Gegner sichtbar. Bleiben spart Energie (nur Grundumsatz)."
+   
+
+
+      Name: "Futter in zwei Richtungen – eines näher",
+      Umgebung:
+
+      ["leer", "futter", "leer"],
+      ["leer", "Biest", "leer"],
+      ["leer", "leer", "futter"]
+      
+      energie: 40,
+      erwartete_bewegung: "oben",
+      begründung: "Zwei Futterquellen sichtbar, das obere Futter ist näher und damit energetisch günstiger erreichbar."
+
+      
+
+      Name: "Futter und schwächeres Biest in der Umgebung",
+      Umgebung:
+
+      ["leer", "futter", "leer"],
+      ["leer", "Biest", "leer"],
+      ["leer", "Biest_schwächer", "leer"]
+      
+      energie: 40,
+      erwartete_bewegung: "unten",
+      begründung: "Sich für schwächeres Biest entscheiden, da dort mehr Energie aufgenommen werden kann."
+
+
+
+      Name: "Death is near",
+      Umgebung:
+
+      ["leer", "leer", "leer"],
+      ["leer", "Biest", "leer"],
+      ["leer", "leer", "leer"]
+      
+      energie: 1,
+      erwartete_bewegung: "stehen bleiben",
+      begründung: "In dieser Situation soll das Biest sich nicht bewegen da es sonst stirbt(Bewegung kostet zu viel Energie)/Hoffen, dass Futter auf der Zelle spawnt"
+
+Illegal Moves(Teilung der Monster eingeschlossen):
+
+
+	Name: "Eigener Teil des Monster auf Nachbarzelle"
+	Umgebung:
+
+	["leer", "leer", "leer"],
+        ["Biest2", "Biest", "leer"],
+        ["leer", "leer", "leer"]
+
+	energie: 40 
+	erwartete_bewegung: "rechts",
+	begründung: "Zwei Biester der selben Abstammung dürfen nicht auf einem Feld stehen da Sie ansonsten verschwinden."
+
+
+
+
+
+
+    

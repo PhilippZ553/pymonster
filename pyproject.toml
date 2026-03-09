@@ -1,0 +1,48 @@
+
+# setup file for project pymonster
+
+[build-system]
+    requires = ["setuptools"]
+    build-backend = "setuptools.build_meta"
+
+[tool.setuptools]
+    packages=["pymonster"]
+
+[project]
+    name = "pymonster"
+    version = "0.0.1"
+    description = "A great project"
+    readme = "README.md" 
+    requires-python = ">=3.10, <4"
+    license = {text = "GPL"}
+    authors = [
+        {name = "Eren Güley"},
+        {name = "Felix Bauer"},
+        {name = "Jost Kretschmann"},
+        {name = "Philipp Zimmermann"},
+        {name = "Stefan Kasberger"}
+    ]
+    maintainers = [
+        {name = "Eren Güley"},
+        {name = "Felix Bauer"},
+        {name = "Jost Kretschmann"},
+        {name = "Philipp Zimmermann"},
+        {name = "Stefan Kasberger"}
+    ]
+    keywords=["example", "project structure"]
+    dependencies = [
+        "numpy>=1.23",
+        "websockets>=10.0"
+    ]
+
+classifiers = [
+        "Development Status :: 3 - Alpha",
+        "Topic :: Demonstration",
+        "License :: GPL License",
+]
+
+[project.urls]
+    Homepage = "https://gitlab.informatik.hs-augsburg.de/prog3_ws2025/gruppe01"
+
+[project.scripts]
+    biester_client= "pymonster.client:client_main"

@@ -1,0 +1,80 @@
+#Kurze Doku zu Beast und gamestate
+
+##ndarray eure methode bekommt ein grid umgesetzt als ein 2d [numpy ndarray](https://numpy.org/devdocs/reference/arrays.ndarray.html) und eine Instanz der Klasse Beast
+
+Das Array stellt das aktuelle Spielfeld da und ist mit folgenden Strings befüllt:
+
+-   "\**" = hier liegt Futter*
+
+-   "B" = hier ist eines unserer Biester(auch das Biest)
+
+-   "." = hier ist gar nichts
+
+-   " " = keine Info (kann das Zeichen ändern z.B. zu "." meldet euch wenn ihr was anderes wollt)
+
+-   "\>" = Gegnerisches beast mit höherer Energie wie das übergebene Biest
+
+-   "\=" = Gegnerisches beast mit gleicher Energie wie das übergebene Biest
+
+-   "\<" = Gegnerisches beast mit niedrigerer Energie wie das übergebene Biest
+
+-   "G" = hier war in der letzten Runde ein größeres Biest
+
+-   "K" = hier war in der letzten Runde ein kleineres Biest
+
+-   "S" = hier war in der letzten Runde ein gleich großes Biest
+
+-   "F" = hier war in der letzten Runde Futter
+
+-   "?" = Beast welches kleiner oder größer sein könnte
+
+Tipps:
+
+so kommt ihr an die dimensionen vom array:
+
+```{python}
+import numpy as np
+hoehe = 7
+breite = 3
+playing_field = np.full((hoehe, breite), "x", dtype="<U1")
+
+#hier die relevante Zeile:
+playing_field_height, playing_field_width = np.shape(playing_field)
+print("Höhe: " + str(playing_field_height))
+print("Breite: " + str(playing_field_width))
+print(playing_field)
+```
+
+beim arbeiten mit dem ndArray müsst ihr auch die y-Kooridiante zuerst und dann die x-Koordinate angeben. dim beginnen bei 0
+
+```{python}
+import numpy as np
+hoehe = 7
+breite = 3
+playing_field = np.full((hoehe, breite), "x", dtype="<U1")
+
+
+print(playing_field)
+#ändert die mittlere zelle:
+playing_field[3][1] = "O"
+print(playing_field)
+```
+
+Wenn ihr ein zweites ndArray braucht braucht könnt ihr indem ihr den [Datentyp](https://numpy.org/devdocs/reference/generated/numpy.dtype.html#numpy.dtype) ändert reinspeichern was ihr wollt bei mir sind mitdtype="\<U1" grad einfach Strings der Länge 1
+
+##Beasts die klasse beasts hat für euch folgende relavante Attribute:
+
+-   ID
+
+    -   getter: <Objekt der Klasse Beast>.get_id()
+    -   returned einen int
+
+-   Y und X Koordiante
+
+    -   getter <Objekt der Klasse Beast>.get_beast_coordinates
+    -   returned ein tupel: (y-Koordiante) (X-Koordiante)
+
+-   energy
+
+    -   getter <Objekt der Klasse Beast>.get_id()
+    -   returned ein float
